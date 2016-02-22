@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>The VPR Poll: Marijuana Legalization</title>
+	<script type="text/javascript" src="d3.v3.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	h2 {
+		font-family: "Lato", sans-serif;
+		font-weight: 900;
+	}
+	h3 {
+		font-family: "Lato", sans-serif;
+		font-weight: 900;
+	}
+	text {
+		font-family: "Lato", sans-serif;
+		font-weight: 900;
+	}
+	</style>
+</head>
+<body>
+
+
+	<h2>Marijuana Legalization in Vermont</h2>
+	<h3><span id="one">Among Republicans?</span><span id="two"> 65 years old or older?</span></h3>
+
+	<script type="text/javascript">
+
+	var w = 600;
+	var h = 250;
+
+	dataset = [ 55, 32 ]
+	stand = [ "Support", "Oppose" ]
+	colors = [ "#22b573", "#013F39" ]
+
+
+	var xScale = d3.scale.ordinal()
+	.domain(d3.range(dataset.length))
+	.rangeRoundBands([0, w], 0.05);
+
+	var yScale = d3.scale.linear()
+	.domain([0, d3.max(dataset)])
+	.range([0, h]);
+
+	var svg = d3.select("body")
+	.append("svg")
+	.attr("width", w)
+	.attr("height", h);
+
+	svg.selectAll("rect")
+	.data(dataset)
+	.enter()
+	.append("rect")
+	.attr("x", function(d, i) {
+		return xScale(i);
+	})
+	.attr("y", function(d) {
+		return h - yScale(d);
+	})
+	.attr("width", xScale.rangeBand())
+	.attr("height", function(d) {
+		return yScale(d);
+	})
+	.attr("fill", function(d, i) {
+		return colors[i];
+	});
+
+	svg.selectAll("text")
+	.data(dataset)
+	.enter()
+	.append("text")
+	.text(function(d,i) {
+		return d + "%" + " " + stand[i];
+	})
+	.attr("text-anchor", "middle")
+	.attr("x", function(d, i) {
+		return xScale(i) + xScale.rangeBand() / 2;
+	})
+	.attr("y", function(d) {
+		return h - 10;
+	})
+	.attr("font-size", "30px")
+	.attr("fill", "white")
+
+
+	d3.select("#one")
+	.on("mouseover", function() {
+
+		dataset = [ 29, 56 ];
+
+		svg.selectAll("rect")
+		.data(dataset)
+		.transition()
+		.duration(800)
+		.attr("y", function(d) {
+			return h - yScale(d);
+		})
+		.attr("height", function(d) {
+			return yScale(d);
+		})
+		.attr("fill", function(d, i) {
+			return colors[i];
+		});
+
+		svg.selectAll("text")
+		.data(dataset)
+		.transition()
+		.duration(800)
+		.text(function(d,i) {
+			return d + "%" + " " + stand[i];
+		})
+		.attr("x", function(d, i) {
+			return xScale(i) + xScale.rangeBand() / 2;
+		})
+		.attr("y", function(d) {
+			return h - 10;
+		});
+	});
+
+	d3.select("#two")
+	.on("mouseover", function() {
+
+		dataset = [ 34, 53 ];
+
+		svg.selectAll("rect")
+		.data(dataset)
+		.transition()
+		.duration(800)
+		.attr("y", function(d) {
+			return h - yScale(d);
+		})
+		.attr("height", function(d) {
+			return yScale(d);
+		})
+		.attr("fill", function(d, i) {
+			return colors[i];
+		});
+
+		svg.selectAll("text")
+		.data(dataset)
+		.transition()
+		.duration(1200)
+		.text(function(d,i) {
+			return d + "%" + " " + stand[i];
+		})
+		.attr("x", function(d, i) {
+			return xScale(i) + xScale.rangeBand() / 2;
+		})
+		.attr("y", function(d) {
+			return h - 10;
+		});
+	});
+
+	d3.select("h2")
+	.on("mouseover", function() {
+
+		dataset = [ 55, 32 ]
+
+		svg.selectAll("rect")
+		.data(dataset)
+		.transition()
+		.duration(800)
+		.attr("y", function(d) {
+			return h - yScale(d);
+		})
+		.attr("height", function(d) {
+			return yScale(d);
+		})
+		.attr("fill", function(d, i) {
+			return colors[i];
+		});
+
+		svg.selectAll("text")
+		.data(dataset)
+		.transition()
+		.duration(800)
+		.text(function(d,i) {
+			return d + "%" + " " + stand[i];
+		})
+		.attr("x", function(d, i) {
+			return xScale(i) + xScale.rangeBand() / 2;
+		})
+		.attr("y", function(d) {
+			return h - 10;
+		});
+	});
+
+	</script>
+</body>
+</html>
